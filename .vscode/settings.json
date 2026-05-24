@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "C:\\Users\\Negrito\\.conda\\envs\\DjPy38\\python.exe",
-    "python.linting.pylintArgs": [
-        "--errors-only",
-        "--load-plugins",
-        "pylint_django"
-    ]
-}
