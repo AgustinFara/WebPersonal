@@ -2,6 +2,22 @@ from django.db import models
 from babel import Locale
 from django.conf import settings
 
+class Technology(models.Model):
+    name = models.CharField(max_length=50)
+    icon_svg = models.TextField(help_text="Pega aquí el código SVG")
+    created = models.DateTimeField(auto_now_add=True, verbose_name = "Cronomarcador de creación")
+    updated = models.DateTimeField(auto_now =True, verbose_name = "Cronomarcador de modificación")
+
+    class Meta:
+        verbose_name = 'Tecnología'
+        verbose_name_plural = 'Tecnologías'
+
+
+
+    def __str__(self):
+        return self.name
+
+
 # Create your models here.
 class Work(models.Model):
     title = models.CharField(max_length=200, verbose_name = "Título")
@@ -37,9 +53,9 @@ class Work(models.Model):
         months = ( self.datefinish.year - self.datestart.year) * 12 + self.datefinish.month - self.datestart.month
         years = months // 12
         months = months - ( years * 12 )
-       
+
         if years > 1:
-            year_name = ' años' 
+            year_name = ' años'
         else:
             year_name = ' año'
 
@@ -47,20 +63,20 @@ class Work(models.Model):
             month_name = ' meses'
         else:
             month_name = ' mes'
-        
+
         if years == 0:
             if months == 1:
                 days_diff =  self.datefinish - self.datestart
                 if days_diff.days < 30:
-                    return('Menos de un mes')     
+                    return('Menos de un mes')
                 else:
                     return(str(months) + month_name)
             else:
-                return(str(months) + month_name)    
+                return(str(months) + month_name)
         else:
-            if months == 0: 
+            if months == 0:
                 return(str(years) + year_name)
-            else:    
+            else:
                 return(str(years) + year_name + ' y ' + str(months) + month_name)
 
 class Client(models.Model):
@@ -78,6 +94,9 @@ class Client(models.Model):
         verbose_name_plural = 'Clientes'
         ordering = ['-datefinish']
 
+    def __str__(self):
+        return f"{self.company} cliente de {self.client.company}"
+
     def date_started(self):
             locale = Locale(settings.LANGUAGE_CODE[:2])
             month = self.datestart.strftime("%m")
@@ -94,9 +113,9 @@ class Client(models.Model):
         months = ( self.datefinish.year - self.datestart.year) * 12 + self.datefinish.month - self.datestart.month
         years = months // 12
         months = months - ( years * 12 )
-       
+
         if years > 1:
-            year_name = ' años' 
+            year_name = ' años'
         else:
             year_name = ' año'
 
@@ -104,18 +123,18 @@ class Client(models.Model):
             month_name = ' meses'
         else:
             month_name = ' mes'
-        
+
         if years == 0:
             if months == 1:
                 days_diff =  self.datefinish - self.datestart
                 if days_diff.days < 30:
-                    return('Menos de un mes')     
+                    return('Menos de un mes')
                 else:
                     return(str(months) + month_name)
             else:
-                return(str(months) + month_name)    
+                return(str(months) + month_name)
         else:
-            if months == 0: 
+            if months == 0:
                 return(str(years) + year_name)
-            else:    
+            else:
                 return(str(years) + year_name + ' y ' + str(months) + month_name)
