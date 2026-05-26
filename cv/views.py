@@ -2,7 +2,11 @@ from django.shortcuts import render
 from django.db.models import Min, Max
 from django.db.models.functions import Lower
 import datetime
-from .models import Work
+from .models import Work, Technology
+
+def tech(request):
+    techs = Technology.objects.all()
+    return render(request, 'cv/tech.html', {'techs': techs})
 
 
 def about(request):
@@ -62,7 +66,3 @@ def cv(request):
     works = Work.objects.all()
 
     return render(request, "cv/cv.html", {'works':works})
-
-def tech(request):
-
-    return render(request, "cv/tech.html")

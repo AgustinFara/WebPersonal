@@ -30,8 +30,8 @@ class Course(models.Model):
     archivo_pdf = models.FileField(blank=True, null=True, verbose_name = "Certificado PDF", upload_to = 'courses/certificates/')
 
     class Meta:
-        verbose_name = 'Course'
-        verbose_name_plural = 'Courses'
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
         ordering = ['-date']
 
     def __str__(self):
